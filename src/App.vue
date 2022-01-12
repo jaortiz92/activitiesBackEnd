@@ -1,30 +1,59 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class="dropdown-item" to="/">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="dropdown-item" to="/transaction"
+              >Transaction</router-link
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <router-view />
   </div>
-  <router-view/>
 </template>
 
 <style>
+:root {
+  --gray-border: #616161;
+  --text: #070707;
+  --basic: #f74949;
+  --background: #afafafd7;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text);
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+nav {
+  background-color: var(--background);
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--basic);
+}
+
+/* Tables */
+
+th {
+  height: 2rem;
+  border: 1.5px solid var(--gray-border);
+  text-align: center;
+}
+
+td {
+  width: fit-content;
+  height: 50px;
+  border: 1px solid var(--gray-border);
+  text-align: right;
 }
 </style>

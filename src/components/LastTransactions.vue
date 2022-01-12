@@ -1,6 +1,6 @@
 <template>
   <div class="LastTransactions">
-    <table v-if="transactions" class="table table-bordered">
+    <table v-if="transactions">
       <thead>
         <tr>
           <th>ID</th>

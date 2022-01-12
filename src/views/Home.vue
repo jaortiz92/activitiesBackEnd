@@ -3,9 +3,15 @@
     <LastTransactions></LastTransactions>
   </div>
 </template>
+<style>
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
 
 <script>
-// @ is an alias to /src
 import LastTransactions from "@/components/LastTransactions.vue";
 
 export default {
