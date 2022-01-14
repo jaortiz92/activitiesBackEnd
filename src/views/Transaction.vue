@@ -3,24 +3,36 @@
     <nav class="nav-left">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="dropdown-item" @click="change(1)">Income</a>
+          <a class="dropdown-item" @click="change(1, 'Income')">Income</a>
         </li>
         <li class="nav-item">
-          <a class="dropdown-item" href="#">Expenditure</a>
+          <a class="dropdown-item" @click="change(2, 'Expenditure')"
+            >Expenditure</a
+          >
         </li>
         <li class="nav-item">
-          <a class="dropdown-item" href="#">Cost</a>
+          <a class="dropdown-item" @click="change(2, 'Cost')">Cost</a>
         </li>
         <li class="nav-item">
-          <a class="dropdown-item" href="#">Savings</a>
+          <a class="dropdown-item" @click="change(2, 'Buy Assets')"
+            >Buy Assets</a
+          >
         </li>
         <li class="nav-item">
-          <a class="dropdown-item" href="#">Transfer</a>
+          <a class="dropdown-item" @click="change(3, 'Savings')">Savings</a>
+        </li>
+        <li class="nav-item">
+          <a class="dropdown-item" @click="change(3, 'Transfer')">Transfer</a>
         </li>
       </ul>
     </nav>
     <div class="form">
-      <Income v-if="pag === 1"></Income>
+      <AddTransaction
+        v-if="group"
+        :group="group"
+        :namePag="namePag"
+        :key="keyAddTransaction"
+      ></AddTransaction>
     </div>
   </div>
 </template>
@@ -48,21 +60,25 @@
 </style>
 
 <script>
-import Income from "@/components/Income.vue";
+import AddTransaction from "@/components/AddTransaction.vue";
 
 export default {
   name: "Transaction",
   components: {
-    Income,
+    AddTransaction,
   },
   data: function () {
     return {
-      pag: null,
+      keyAddTransaction: 0,
+      group: null,
+      namePag: null,
     };
   },
   methods: {
-    change: function (value) {
-      this.pag = value;
+    change: function (group, namePag) {
+      this.group = group;
+      this.namePag = namePag;
+      this.keyAddTransaction += 1;
     },
   },
 };
