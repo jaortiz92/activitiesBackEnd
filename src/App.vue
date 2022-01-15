@@ -11,6 +11,9 @@
               >Transaction</router-link
             >
           </li>
+          <li class="nav-item">
+            <router-link class="dropdown-item" to="/edit">Edit</router-link>
+          </li>
         </ul>
       </div>
     </nav>

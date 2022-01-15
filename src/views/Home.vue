@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <LastTransactions></LastTransactions>
+    <LastTransactions :toShow="50"></LastTransactions>
   </div>
 </template>
 <style>

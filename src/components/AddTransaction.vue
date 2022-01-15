@@ -1,119 +1,201 @@
 <template>
-  <div class="income">
+  <div class="transaction-form">
     <h1>{{ namePag }}</h1>
-    <form v-on:submit.prevent="saveTransaction">
-      <label>Date</label>
-      <input
-        v-model="transaction.transaction_date"
-        type="date"
-        required="true"
-      />
-      <label>Accounts</label>
-      <div>
-        <label>First</label>
-        <select v-model="transaction.activity_one.account_id" required="true">
-          <option selected="true" disabled="disabled">Select option</option>
-          <option
-            v-for="account in accounts"
-            :key="account.account_id"
-            :value="account.account_id"
+    <div class="input-group">
+      <form v-on:submit.prevent="saveTransaction">
+        <div class="item-transaction">
+          <label class="label-transaction">Date</label>
+          <input
+            class="form-control input-transaction"
+            v-model="transaction.transaction_date"
+            type="date"
+            required="true"
+          />
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction">Accounts</label>
+          <div>
+            <div class="input-transaction">
+              <label>First</label>
+              <select
+                class="form-select"
+                v-model="transaction.activity_one.account_id"
+                required="true"
+              >
+                <option selected="true" disabled="disabled">
+                  Select option
+                </option>
+                <option
+                  v-for="account in accounts"
+                  :key="account.account_id"
+                  :value="account.account_id"
+                >
+                  {{ account.account_id }} : {{ account.account }}
+                </option>
+              </select>
+              <select
+                class="form-select"
+                @change="validateNature(1)"
+                v-model="transaction.activity_one.nature"
+                required="true"
+              >
+                <option selected="true" disabled="disabled">
+                  Select option
+                </option>
+                <option :value="parseInt(1)">DB</option>
+                <option :value="parseInt(0)">CR</option>
+              </select>
+            </div>
+            <div class="input-transaction">
+              <label>Second</label>
+              <select
+                class="form-select"
+                v-model="transaction.activity_two.account_id"
+                required="true"
+              >
+                <option selected="true" disabled="disabled">
+                  Select option
+                </option>
+                <option
+                  v-for="account in accounts"
+                  :key="account.account_id"
+                  :value="account.account_id"
+                >
+                  {{ account.account_id }} : {{ account.account }}
+                </option>
+              </select>
+              <select
+                class="form-select"
+                @change="validateNature(2)"
+                v-model="transaction.activity_two.nature"
+                required="true"
+              >
+                <option selected="true" disabled="disabled">
+                  Select option
+                </option>
+                <option :value="parseInt(1)">DB</option>
+                <option :value="parseInt(0)">CR</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction">Category</label>
+          <select
+            class="form-select input-transaction"
+            v-model="transaction.category_id"
+            required="true"
           >
-            {{ account.account_id }} : {{ account.account }}
-          </option>
-        </select>
-        <select
-          @change="validateNature(1)"
-          v-model="transaction.activity_one.nature"
-          required="true"
-        >
-          <option selected="true" disabled="disabled">Select option</option>
-          <option :value="parseInt(1)">DB</option>
-          <option :value="parseInt(0)">CR</option>
-        </select>
-        <label>Second</label>
-        <select v-model="transaction.activity_two.account_id" required="true">
-          <option selected="true" disabled="disabled">Select option</option>
-          <option
-            v-for="account in accounts"
-            :key="account.account_id"
-            :value="account.account_id"
+            <option selected="true" disabled="disabled">Select option</option>
+            <option
+              v-for="category in categories"
+              :key="category.category_id"
+              :value="category.category_id"
+            >
+              {{ category.category }}
+            </option>
+          </select>
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction">Description</label>
+          <select
+            class="form-select input-transaction"
+            v-model="transaction.description_id"
+            required="true"
           >
-            {{ account.account_id }} : {{ account.account }}
-          </option>
-        </select>
-        <select
-          @change="validateNature(2)"
-          v-model="transaction.activity_two.nature"
-          required="true"
-        >
-          <option selected="true" disabled="disabled">Select option</option>
-          <option :value="parseInt(1)">DB</option>
-          <option :value="parseInt(0)">CR</option>
-        </select>
-      </div>
-      <label>Category</label>
-      <select v-model="transaction.category_id" required="true">
-        <option selected="true" disabled="disabled">Select option</option>
-        <option
-          v-for="category in categories"
-          :key="category.category_id"
-          :value="category.category_id"
-        >
-          {{ category.category }}
-        </option>
-      </select>
-      <label>Description</label>
-      <select v-model="transaction.description_id" required="true">
-        <option selected="true" disabled="disabled">Select option</option>
-        <option
-          v-for="description in descriptions"
-          :key="description.description_id"
-          :value="description.description_id"
-        >
-          {{ description.description }}
-        </option>
-      </select>
-      <label>Kind</label>
-      <select v-model="transaction.kind_id" required="true">
-        <option selected="true" disabled="disabled">Select option</option>
-        <option v-for="kind in kinds" :key="kind.kind_id" :value="kind.kind_id">
-          {{ kind.kind }}
-        </option>
-      </select>
-      <label>Origin</label>
-      <select v-model="transaction.origin_id" required="true">
-        <option selected="true" disabled="disabled">Select option</option>
-        <option
-          v-for="origin in origins"
-          :key="origin.origin_id"
-          :value="origin.origin_id"
-        >
-          {{ origin.origin }}
-        </option>
-      </select>
-      <label>Destiny</label>
-      <select v-model="transaction.destiny_id" required="true">
-        <option selected="true" disabled="disabled">Select option</option>
-        <option
-          v-for="origin in origins"
-          :key="origin.origin_id"
-          :value="origin.origin_id"
-        >
-          {{ origin.origin }}
-        </option>
-      </select>
-      <label>Value</label>
-      <input v-model="transaction.value" type="number" required="true" />
-      <label>Detail</label>
-      <textarea v-model="transaction.detail" type="text" rows="3" />
-      <button type="submit">Save</button>
-    </form>
+            <option selected="true" disabled="disabled">Select option</option>
+            <option
+              v-for="description in descriptions"
+              :key="description.description_id"
+              :value="description.description_id"
+            >
+              {{ description.description }}
+            </option>
+          </select>
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction" v-if="forShow.kind">Kind</label>
+          <select
+            class="form-select input-transaction"
+            v-if="forShow.kind"
+            v-model="transaction.kind_id"
+            required="true"
+          >
+            <option selected="true" disabled="disabled">Select option</option>
+            <option
+              v-for="kind in kinds"
+              :key="kind.kind_id"
+              :value="kind.kind_id"
+            >
+              {{ kind.kind }}
+            </option>
+          </select>
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction" v-if="forShow.origin">Origin</label>
+          <select
+            class="form-select input-transaction"
+            v-if="forShow.origin"
+            v-model="transaction.origin_id"
+            required="true"
+          >
+            <option selected="true" disabled="disabled">Select option</option>
+            <option
+              v-for="origin in origins"
+              :key="origin.origin_id"
+              :value="origin.origin_id"
+            >
+              {{ origin.origin }}
+            </option>
+          </select>
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction" v-if="forShow.destiny"
+            >Destiny</label
+          >
+          <select
+            class="form-select input-transaction"
+            v-if="forShow.destiny"
+            v-model="transaction.destiny_id"
+            required="true"
+          >
+            <option selected="true" disabled="disabled">Select option</option>
+            <option
+              v-for="origin in origins"
+              :key="origin.origin_id"
+              :value="origin.origin_id"
+            >
+              {{ origin.origin }}
+            </option>
+          </select>
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction">Value</label>
+          <input
+            class="form-control input-transaction"
+            v-model="transaction.value"
+            type="number"
+            min="1000"
+            max="70000000"
+            required="true"
+          />
+        </div>
+        <div class="item-transaction">
+          <label class="label-transaction">Detail</label>
+          <textarea
+            class="form-control input-transaction"
+            v-model="transaction.detail"
+            type="text"
+            rows="3"
+          />
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto item-transaction">
+          <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <h2>{{ transaction }}</h2>
-  <h4>aca {{ group }}</h4>
 </template>
-<style>
-</style>
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -124,13 +206,14 @@ export default {
     group: Number,
     namePag: String,
   },
+  emits: ["updatePag"],
   data: function () {
     return {
       accounts: null,
       categories: null,
       descriptions: null,
       kinds: null,
-      origin: null,
+      origins: null,
       transaction: {
         transaction_date: null,
         value: null,
@@ -152,7 +235,9 @@ export default {
         },
       },
       forShow: {
-        category: true,
+        origin: true,
+        destiny: true,
+        kind: true,
       },
     };
   },
@@ -275,7 +360,13 @@ export default {
           }
         )
         .then((result) => {
-          alert(result.data.transaction_id);
+          Swal.fire({
+            icon: "success",
+            title: "Transaction saved",
+            text: `Transaction's ID ${result.data.transaction_id}`,
+            confirmButtonColor: "#141e28",
+          });
+          this.$emit("updatePag");
         })
         .catch((error) =>
           Swal.fire({
@@ -286,7 +377,40 @@ export default {
           })
         );
     },
-    autofill: function () {},
+    autofill: function () {
+      var shopping = ["Expenditure", "Cost", "Buy Assets"];
+      var transfers = ["Savings", "Transfer"];
+      if (this.namePag === "Income") {
+        this.forShow.origin = false;
+        this.transaction.origin_id = 11;
+      } else if (shopping.indexOf(this.namePag) >= 0) {
+        this.forShow.destiny = false;
+        this.forShow.kind = false;
+        this.transaction.destiny_id = 11;
+        if (this.namePag === shopping[0]) {
+          this.transaction.kind_id = 3;
+        } else if (this.namePag === shopping[1]) {
+          this.transaction.kind_id = 4;
+        } else {
+          this.transaction.kind_id = 5;
+        }
+      } else {
+      }
+    },
   },
 };
 </script>
+<style>
+.item-transaction {
+  display: flex;
+  align-items: center;
+  margin-top: 1%;
+}
+.label-transaction {
+  width: 15%;
+  margin-right: 7%;
+  text-align: left;
+}
+.input-transaction {
+}
+</style>

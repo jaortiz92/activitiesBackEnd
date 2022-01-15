@@ -29,6 +29,7 @@
     <div class="form">
       <AddTransaction
         v-if="group"
+        @updatePag="refreshPag()"
         :group="group"
         :namePag="namePag"
         :key="keyAddTransaction"
@@ -36,29 +37,6 @@
     </div>
   </div>
 </template>
-<style>
-.transaction {
-  display: flex;
-  justify-content: center;
-}
-.nav-left {
-  display: flex;
-  align-items: center;
-  float: left;
-  width: 10%;
-}
-.nav-left a {
-  color: var(--text);
-}
-.nav-left li:hover {
-  cursor: pointer;
-}
-.form {
-  width: 90%;
-  float: right;
-}
-</style>
-
 <script>
 import AddTransaction from "@/components/AddTransaction.vue";
 
@@ -78,8 +56,33 @@ export default {
     change: function (group, namePag) {
       this.group = group;
       this.namePag = namePag;
+      this.refreshPag();
+    },
+    refreshPag: function () {
       this.keyAddTransaction += 1;
     },
   },
 };
 </script>
+<style>
+.transaction {
+  display: flex;
+  justify-content: center;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  float: left;
+  width: 15%;
+}
+.nav-left a {
+  color: var(--text);
+}
+.nav-left li:hover {
+  cursor: pointer;
+}
+.form {
+  width: 80%;
+  float: right;
+}
+</style>

@@ -43,11 +43,10 @@ import Swal from "sweetalert2";
 export default {
   name: "LastTransactions",
   props: {
-    msg: String,
+    toShow: Number,
   },
   data: function () {
     return {
-      toShow: 50,
       transactions: null,
     };
   },
@@ -57,7 +56,7 @@ export default {
   methods: {
     getLastTransactions: function () {
       axios
-        .get(`http://127.0.0.1:8000/transaction/?limit${this.toShow}`, {
+        .get(`http://127.0.0.1:8000/transaction/?limit=${this.toShow}`, {
           headers: {},
         })
         .then((result) => {
