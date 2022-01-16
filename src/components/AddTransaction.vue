@@ -351,31 +351,40 @@ export default {
         );
     },
     saveTransaction: function () {
-      axios
-        .post(
-          `http://127.0.0.1:8000/transaction/complete_post`,
-          this.transaction,
-          {
-            headers: {},
-          }
-        )
-        .then((result) => {
-          Swal.fire({
-            icon: "success",
-            title: "Transaction saved",
-            text: `Transaction's ID ${result.data.transaction_id}`,
-            confirmButtonColor: "#141e28",
-          });
-          this.$emit("updatePag");
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR to save transaction ${error}`,
-            confirmButtonColor: "#141e28",
+      if (this.transaction.origin_id == this.transaction.destiny_id) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `ERROR to save transaction origin and destiny are the same`,
+          confirmButtonColor: "#141e28",
+        });
+      } else {
+        axios
+          .post(
+            `http://127.0.0.1:8000/transaction/complete_post`,
+            this.transaction,
+            {
+              headers: {},
+            }
+          )
+          .then((result) => {
+            Swal.fire({
+              icon: "success",
+              title: "Transaction saved",
+              text: `Transaction's ID ${result.data.transaction_id}`,
+              confirmButtonColor: "#141e28",
+            });
+            this.$emit("updatePag");
           })
-        );
+          .catch((error) =>
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: `ERROR to save transaction ${error}`,
+              confirmButtonColor: "#141e28",
+            })
+          );
+      }
     },
     autofill: function () {
       var shopping = ["Expenditure", "Cost", "Buy Assets"];

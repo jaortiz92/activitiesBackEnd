@@ -22,7 +22,7 @@
           <a class="dropdown-item" @click="change(3, 'Savings')">Savings</a>
         </li>
         <li class="nav-item">
-          <a class="dropdown-item" @click="change(3, 'Transfer')">Transfer</a>
+          <a class="dropdown-item" @click="change(1, 'Transfer')">Transfer</a>
         </li>
       </ul>
     </nav>
