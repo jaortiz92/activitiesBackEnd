@@ -20,11 +20,11 @@
       >
         <td>{{ transaction.transaction_id }}</td>
         <td>{{ transaction.transaction_date }}</td>
-        <td>{{ transaction.category.category }}</td>
-        <td>{{ transaction.description.description }}</td>
-        <td>{{ transaction.kind.kind }}</td>
-        <td>{{ transaction.origin.origin }}</td>
-        <td>{{ transaction.destiny.origin }}</td>
+        <td>{{ transaction.category }}</td>
+        <td>{{ transaction.description }}</td>
+        <td>{{ transaction.kind }}</td>
+        <td>{{ transaction.origin }}</td>
+        <td>{{ transaction.destiny }}</td>
         <td>
           {{ showAccountOfActivity(transaction.activities[0]) }}|{{
             showAccountOfActivity(transaction.activities[1])
@@ -56,9 +56,12 @@ export default {
   methods: {
     getLastTransactions: function () {
       axios
-        .get(`http://127.0.0.1:8000/transaction/?limit=${this.toShow}`, {
-          headers: {},
-        })
+        .get(
+          `http://127.0.0.1:8000/transaction/transactionShowFront?limit=${this.toShow}`,
+          {
+            headers: {},
+          }
+        )
         .then((result) => {
           this.transactions = result.data;
         })
@@ -76,8 +79,7 @@ export default {
       return formatter.format(value);
     },
     showAccountOfActivity(value) {
-      var nature = value.nature == 1 ? "DB" : "CR";
-      return `${nature}-${value.account.account_id}`;
+      return `${value.nature}-${value.account_id}`;
     },
   },
 };
