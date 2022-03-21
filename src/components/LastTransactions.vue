@@ -12,6 +12,7 @@
           <th>Destiny</th>
           <th>Accounts</th>
           <th>Value</th>
+          <th>Detail</th>
         </tr>
       </thead>
       <tbody
@@ -31,6 +32,7 @@
           }}
         </td>
         <td>{{ formatterNumber(transaction.value) }}</td>
+        <td>{{ transaction.detail }}</td>
       </tbody>
     </table>
   </div>
