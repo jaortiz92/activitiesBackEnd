@@ -59,7 +59,7 @@ export default {
     getLastTransactions: function () {
       axios
         .get(
-          `http://127.0.0.1:8000/transaction/transactionShowFront?limit=${this.toShow}`,
+          `http://127.0.0.1:8010/transaction/transactionShowFront?limit=${this.toShow}`,
           {
             headers: {},
           }

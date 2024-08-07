@@ -267,7 +267,7 @@ export default {
     },
     getAccounts: function () {
       axios
-        .get(`http://127.0.0.1:8000/account/`, {
+        .get(`http://127.0.0.1:8010/account/`, {
           headers: {},
         })
         .then((result) => {
@@ -284,7 +284,7 @@ export default {
     },
     getCategories: function () {
       axios
-        .get(`http://127.0.0.1:8000/category/group/${this.group}`, {
+        .get(`http://127.0.0.1:8010/category/group/${this.group}`, {
           headers: {},
         })
         .then((result) => {
@@ -301,7 +301,7 @@ export default {
     },
     getDescriptions: function () {
       axios
-        .get(`http://127.0.0.1:8000/description/group/${this.group}`, {
+        .get(`http://127.0.0.1:8010/description/group/${this.group}`, {
           headers: {},
         })
         .then((result) => {
@@ -318,7 +318,7 @@ export default {
     },
     getKinds: function () {
       axios
-        .get(`http://127.0.0.1:8000/kind/group/${this.group}`, {
+        .get(`http://127.0.0.1:8010/kind/group/${this.group}`, {
           headers: {},
         })
         .then((result) => {
@@ -335,7 +335,7 @@ export default {
     },
     getOrigins: function () {
       axios
-        .get(`http://127.0.0.1:8000/origin/`, {
+        .get(`http://127.0.0.1:8010/origin/`, {
           headers: {},
         })
         .then((result) => {
@@ -361,7 +361,7 @@ export default {
       } else {
         axios
           .post(
-            `http://127.0.0.1:8000/transaction/complete_post`,
+            `http://127.0.0.1:8010/transaction/complete_post`,
             this.transaction,
             {
               headers: {},

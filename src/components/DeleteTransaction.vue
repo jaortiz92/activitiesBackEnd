@@ -39,7 +39,7 @@ export default {
         if (result.isConfirmed) {
           axios
             .delete(
-              `http://127.0.0.1:8000/transaction/${this.transaction_id}/delete`,
+              `http://127.0.0.1:8010/transaction/${this.transaction_id}/delete`,
               {
                 headers: {},
               }

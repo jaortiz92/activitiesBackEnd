@@ -38,7 +38,7 @@ export default {
     },
     getdepositAccount: function () {
       axios
-        .get(`http://127.0.0.1:8000/query/deposit_accounts`, {
+        .get(`http://127.0.0.1:8010/query/deposit_accounts`, {
           headers: {},
         })
         .then((result) => {
