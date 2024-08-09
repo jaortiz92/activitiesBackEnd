@@ -13,6 +13,23 @@
           />
         </div>
         <div class="item-transaction">
+          <label class="label-transaction">Recurring Transactions</label>
+          <select
+            class="form-select input-transaction"
+            @change="generateRecurringTransactions"
+            v-model="selectedRecurringTransactions"
+          >
+            <option selected="true" disabled="disabled">Select option</option>
+            <option
+              v-for="rTransaction in filterRecurringTransactions"
+              :key="rTransaction.name"
+              :value="rTransaction"
+            >
+              {{ rTransaction.name }}
+            </option>
+          </select>
+        </div>
+        <div class="item-transaction">
           <label class="label-transaction">Accounts</label>
           <div>
             <div class="input-transaction">
@@ -175,8 +192,8 @@
             class="form-control input-transaction"
             v-model="transaction.value"
             type="number"
-            min="1000"
-            max="70000000"
+            min="100"
+            max="100000000"
             required="true"
           />
         </div>
@@ -199,6 +216,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { recurringTransactions } from "../data/recurringTransactions.js"
 
 export default {
   name: "AddTransaction",
@@ -214,6 +232,7 @@ export default {
       descriptions: null,
       kinds: null,
       origins: null,
+      selectedRecurringTransactions: null,
       transaction: {
         transaction_date: null,
         value: null,
@@ -239,6 +258,7 @@ export default {
         destiny: true,
         kind: true,
       },
+      recurringTransactions,
     };
   },
   mounted: function () {
@@ -248,6 +268,13 @@ export default {
     this.getKinds();
     this.getOrigins();
     this.autofill();
+  },
+  computed: {
+    filterRecurringTransactions(){
+      return this.recurringTransactions.filter(
+        rTransaction => rTransaction.namePag == this.namePag
+      )
+    }
   },
   methods: {
     validateNature: function (value) {
@@ -263,6 +290,27 @@ export default {
         } else {
           this.transaction.activity_one.nature = 1;
         }
+      }
+    },
+    generateRecurringTransactions: function () {
+      if (this.selectedRecurringTransactions){
+        this.transaction.activity_one.nature = this.selectedRecurringTransactions.activity_one.nature;
+        this.transaction.activity_one.account_id = this.selectedRecurringTransactions.activity_one.account_id;
+        this.transaction.activity_two.nature = this.selectedRecurringTransactions.activity_two.nature;
+        this.transaction.activity_two.account_id = this.selectedRecurringTransactions.activity_two.account_id;
+        this.transaction.category_id = this.selectedRecurringTransactions.category_id;
+        if (this.selectedRecurringTransactions.description_id){
+          this.transaction.description_id = this.selectedRecurringTransactions.description_id;
+        };
+        if (this.selectedRecurringTransactions.origin_id){
+          this.transaction.origin_id = this.selectedRecurringTransactions.origin_id
+        };
+        if (this.selectedRecurringTransactions.destiny_id){
+          this.transaction.destiny_id = this.selectedRecurringTransactions.destiny_id
+        };
+        if (this.selectedRecurringTransactions.kind_id){
+          this.transaction.kind_id = this.selectedRecurringTransactions.kind_id
+        };
       }
     },
     getAccounts: function () {
