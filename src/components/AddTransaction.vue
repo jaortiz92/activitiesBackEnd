@@ -216,7 +216,8 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import { recurringTransactions } from "../data/recurringTransactions.js"
+import { recurringTransactions } from "../data/recurringTransactions.js";
+import { transactionService } from "../services/transactionService.js";
 
 export default {
   name: "AddTransaction",
@@ -270,13 +271,21 @@ export default {
     this.autofill();
   },
   computed: {
-    filterRecurringTransactions(){
+    filterRecurringTransactions() {
       return this.recurringTransactions.filter(
-        rTransaction => rTransaction.namePag == this.namePag
-      )
-    }
+        (rTransaction) => rTransaction.namePag == this.namePag
+      );
+    },
   },
   methods: {
+    errorAlert: function (option, introduction = "ERROR to charge ") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${introduction} ${option}`,
+        confirmButtonColor: "#141e28",
+      });
+    },
     validateNature: function (value) {
       if (value === 1) {
         if (this.transaction.activity_one.nature === 1) {
@@ -293,112 +302,75 @@ export default {
       }
     },
     generateRecurringTransactions: function () {
-      if (this.selectedRecurringTransactions){
-        this.transaction.activity_one.nature = this.selectedRecurringTransactions.activity_one.nature;
-        this.transaction.activity_one.account_id = this.selectedRecurringTransactions.activity_one.account_id;
-        this.transaction.activity_two.nature = this.selectedRecurringTransactions.activity_two.nature;
-        this.transaction.activity_two.account_id = this.selectedRecurringTransactions.activity_two.account_id;
-        this.transaction.category_id = this.selectedRecurringTransactions.category_id;
-        if (this.selectedRecurringTransactions.description_id){
-          this.transaction.description_id = this.selectedRecurringTransactions.description_id;
-        };
-        if (this.selectedRecurringTransactions.origin_id){
-          this.transaction.origin_id = this.selectedRecurringTransactions.origin_id
-        };
-        if (this.selectedRecurringTransactions.destiny_id){
-          this.transaction.destiny_id = this.selectedRecurringTransactions.destiny_id
-        };
-        if (this.selectedRecurringTransactions.kind_id){
-          this.transaction.kind_id = this.selectedRecurringTransactions.kind_id
-        };
+      if (this.selectedRecurringTransactions) {
+        this.transaction.activity_one.nature =
+          this.selectedRecurringTransactions.activity_one.nature;
+        this.transaction.activity_one.account_id =
+          this.selectedRecurringTransactions.activity_one.account_id;
+        this.transaction.activity_two.nature =
+          this.selectedRecurringTransactions.activity_two.nature;
+        this.transaction.activity_two.account_id =
+          this.selectedRecurringTransactions.activity_two.account_id;
+        this.transaction.category_id =
+          this.selectedRecurringTransactions.category_id;
+        if (this.selectedRecurringTransactions.description_id) {
+          this.transaction.description_id =
+            this.selectedRecurringTransactions.description_id;
+        }
+        if (this.selectedRecurringTransactions.origin_id) {
+          this.transaction.origin_id =
+            this.selectedRecurringTransactions.origin_id;
+        }
+        if (this.selectedRecurringTransactions.destiny_id) {
+          this.transaction.destiny_id =
+            this.selectedRecurringTransactions.destiny_id;
+        }
+        if (this.selectedRecurringTransactions.kind_id) {
+          this.transaction.kind_id = this.selectedRecurringTransactions.kind_id;
+        }
       }
     },
-    getAccounts: function () {
-      axios
-        .get(`http://127.0.0.1:8010/account/`, {
-          headers: {},
-        })
-        .then((result) => {
-          this.accounts = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR to charge accounts`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getAccounts() {
+      try {
+        const response = await transactionService.getAccounts();
+        this.accounts = response.data;
+      } catch (error) {
+        this.errorAlert("accounts");
+      }
     },
-    getCategories: function () {
-      axios
-        .get(`http://127.0.0.1:8010/category/group/${this.group}`, {
-          headers: {},
-        })
-        .then((result) => {
-          this.categories = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR to charge categories`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getCategories() {
+      try {
+        const response = await transactionService.getCategories(this.group);
+        this.categories = response.data;
+      } catch (error) {
+        this.errorAlert("categories");
+      }
     },
-    getDescriptions: function () {
-      axios
-        .get(`http://127.0.0.1:8010/description/group/${this.group}`, {
-          headers: {},
-        })
-        .then((result) => {
-          this.descriptions = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR to charge descriptions`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getDescriptions() {
+      try {
+        const response = await transactionService.getDescriptions(this.group);
+        this.descriptions = response.data;
+      } catch {
+        this.errorAlert("descriptions");
+      }
     },
-    getKinds: function () {
-      axios
-        .get(`http://127.0.0.1:8010/kind/group/${this.group}`, {
-          headers: {},
-        })
-        .then((result) => {
-          this.kinds = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR to charge kinds`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getKinds() {
+      try {
+        const response = await transactionService.getKinds(this.group);
+        this.kinds = response.data;
+      } catch {
+        this.errorAlert("kind");
+      }
     },
-    getOrigins: function () {
-      axios
-        .get(`http://127.0.0.1:8010/origin/`, {
-          headers: {},
-        })
-        .then((result) => {
-          this.origins = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR to charge origins`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getOrigins() {
+      try {
+        const response = await transactionService.getOrigins(this.group);
+        this.origins = response.data;
+      } catch {
+        this.errorAlert("kind");
+      }
     },
-    saveTransaction: function () {
+    async saveTransaction() {
       if (this.transaction.origin_id == this.transaction.destiny_id) {
         Swal.fire({
           icon: "error",
@@ -407,31 +379,19 @@ export default {
           confirmButtonColor: "#141e28",
         });
       } else {
-        axios
-          .post(
-            `http://127.0.0.1:8010/transaction/complete_post`,
-            this.transaction,
-            {
-              headers: {},
-            }
-          )
-          .then((result) => {
-            Swal.fire({
-              icon: "success",
-              title: "Transaction saved",
-              text: `Transaction's ID ${result.data.transaction_id}`,
-              confirmButtonColor: "#141e28",
-            });
-            this.$emit("updatePag");
-          })
-          .catch((error) =>
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: `ERROR to save transaction ${error}`,
-              confirmButtonColor: "#141e28",
-            })
+        try {
+          const response = await transactionService.postTransaction(
+            this.transaction
           );
+          Swal.fire({
+            icon: "success",
+            title: "Transaction saved",
+            text: `Transaction's ID ${response.data.transaction_id}`,
+            confirmButtonColor: "#141e28",
+          });
+        } catch (error) {
+          this.errorAlert(error, "ERROR to save transaction");
+        }
       }
     },
     autofill: function () {

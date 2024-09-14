@@ -57,10 +57,8 @@ export default {
   },
   methods: {
     async getLastTransactions(toShow) {
-      console.log(1);
       try {
         const response = await transactionService.getLastTransactions(toShow);
-        console.log(response);
         this.transactions = response.data;
       } catch (error) {
         Swal.fire({
@@ -70,8 +68,6 @@ export default {
           confirmButtonColor: "#141e28",
         });
       }
-
-      console.log(2);
     },
     formatterNumber: function (value) {
       var formatter = new Intl.NumberFormat("es-CO", {});

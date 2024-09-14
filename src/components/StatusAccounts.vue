@@ -18,8 +18,8 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import Swal from "sweetalert2";
+import { queriesService } from "../services/queriesService";
 
 export default {
   name: "StatusAccounts",
@@ -29,32 +29,27 @@ export default {
     };
   },
   mounted: function () {
-    this.getdepositAccount();
+    this.getdepositAccounts();
   },
   methods: {
     formatterNumber: function (value) {
       var formatter = new Intl.NumberFormat("es-CO", {});
       return formatter.format(value);
     },
-    getdepositAccount: function () {
-      axios
-        .get(`http://127.0.0.1:8010/query/deposit_accounts`, {
-          headers: {},
-        })
-        .then((result) => {
-          this.depositAccounts = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR 404: ${error} with deposit accounts`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getdepositAccounts() {
+      try {
+        const response = await queriesService.getdepositAccounts();
+        this.depositAccounts = response.data;
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `ERROR 404: ${error} with deposit accounts`,
+          confirmButtonColor: "#141e28",
+        });
+      }
     },
   },
 };
 </script>
-<style>
-</style>
+<style></style>
