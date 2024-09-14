@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import Swal from "sweetalert2";
+import { transactionService } from "@/services/transactionService";
 
 export default {
   name: "LastTransactions",
@@ -53,28 +53,25 @@ export default {
     };
   },
   mounted() {
-    this.getLastTransactions();
+    this.getLastTransactions(this.toShow);
   },
   methods: {
-    getLastTransactions: function () {
-      axios
-        .get(
-          `http://127.0.0.1:8010/transaction/transactionShowFront?limit=${this.toShow}`,
-          {
-            headers: {},
-          }
-        )
-        .then((result) => {
-          this.transactions = result.data;
-        })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `ERROR 404: ${error}`,
-            confirmButtonColor: "#141e28",
-          })
-        );
+    async getLastTransactions(toShow) {
+      console.log(1);
+      try {
+        const response = await transactionService.getLastTransactions(toShow);
+        console.log(response);
+        this.transactions = response.data;
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `ERROR 404: ${error}`,
+          confirmButtonColor: "#141e28",
+        });
+      }
+
+      console.log(2);
     },
     formatterNumber: function (value) {
       var formatter = new Intl.NumberFormat("es-CO", {});
@@ -86,5 +83,4 @@ export default {
   },
 };
 </script>
-<style>
-</style>
+<style></style>

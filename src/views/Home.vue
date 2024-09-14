@@ -37,7 +37,7 @@ export default {
     return {
       keyLastTransactions: 0,
       keyStatusAccounts: 0,
-      toShow: 50,
+      toShow: 100,
       toShowForm: null,
     };
   },
