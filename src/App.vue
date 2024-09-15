@@ -26,7 +26,9 @@
   --gray-border: #616161;
   --text: #070707;
   --basic: #f74949;
-  --background: #afafafd7;
+  --background: #a8b897;
+  --even-row: #e9f5dc;
+  --odd-row: #b4d68f;
 }
 
 #app {
@@ -46,17 +48,28 @@ nav {
 }
 
 /* Tables */
-
+table {
+  border: 1.5px solid var(--gray-border);
+}
 th {
   height: 2rem;
   border: 1.5px solid var(--gray-border);
   text-align: center;
+  padding: 12px 15px;
+  font-size: 110%;
 }
 
 td {
   width: fit-content;
-  height: 50px;
-  border: 1px solid var(--gray-border);
-  text-align: right;
+  border-right: 1px solid var(--gray-border);
+  text-align: left;
+  padding: 2px 4px 2px 4px;
+  font-size: 90%;
+}
+tbody:nth-child(even) {
+  background-color: var(--even-row);
+}
+tbody:nth-child(odd) {
+  background-color: var(--odd-row);
 }
 </style>

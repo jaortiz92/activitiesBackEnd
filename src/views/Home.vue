@@ -1,20 +1,20 @@
 <template>
   <div class="home">
     <div class="header-home">
-      <div class="rows-to-show">
-        <form v-on:submit.prevent="refreshLastTransactions()">
-          <label>Rows</label>
-          <input
-            class="form-control"
-            v-model="toShowForm"
-            type="number"
-            min="1"
-            required="true"
-          />
-          <button class="btn btn-danger" type="submit">Show</button>
-        </form>
-      </div>
       <StatusAccounts :key="keyStatusAccounts"></StatusAccounts>
+    </div>
+    <div class="rows-to-show">
+      <form v-on:submit.prevent="refreshLastTransactions()">
+        <label>Rows to show</label>
+        <input
+          class="form-control"
+          v-model="toShowForm"
+          type="number"
+          min="1"
+          required="true"
+        />
+        <button class="btn btn-danger" type="submit">Show</button>
+      </form>
     </div>
     <LastTransactions
       class="transaction-home"
@@ -71,5 +71,19 @@ label {
   justify-content: center;
   margin-bottom: 2%;
   margin-top: 2%;
+}
+.rows-to-show {
+  width: 40%;
+  margin: 1% auto;
+  border: 1px solid;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  min-width: 250px;
+  background: var(--background);
+  border-radius: 5px;
+}
+
+form {
+  padding: 4%;
 }
 </style>

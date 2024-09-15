@@ -1,6 +1,6 @@
 <template>
   <div class="LastTransactions">
-    <table v-if="transactions">
+    <table v-if="transactions" class="table-transactions">
       <thead>
         <tr>
           <th>ID</th>
@@ -19,7 +19,7 @@
         v-for="transaction in transactions"
         :key="transaction.transaction_id"
       >
-        <td>{{ transaction.transaction_id }}</td>
+        <td class="number-value">{{ transaction.transaction_id }}</td>
         <td>{{ transaction.transaction_date }}</td>
         <td>{{ transaction.category }}</td>
         <td>{{ transaction.description }}</td>
@@ -31,8 +31,8 @@
             showAccountOfActivity(transaction.activities[1])
           }}
         </td>
-        <td>{{ formatterNumber(transaction.value) }}</td>
-        <td>{{ transaction.detail }}</td>
+        <td class="number-value">{{ formatterNumber(transaction.value) }}</td>
+        <td class="detail-value">{{ transaction.detail }}</td>
       </tbody>
     </table>
   </div>
@@ -64,7 +64,7 @@ export default {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: `ERROR 404: ${error}`,
+          text: `ERROR: ${error}`,
           confirmButtonColor: "#141e28",
         });
       }
@@ -79,4 +79,14 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+.table-transactions {
+  width: 95%;
+}
+.detail-value {
+  font-size: 75%;
+}
+.number-value {
+  text-align: right;
+}
+</style>
