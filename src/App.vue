@@ -36,10 +36,6 @@ import Navbar from "@/components/Navbar.vue";
   color: var(--text);
 }
 
-.nav-bar {
-  background-color: var(--text);
-}
-
 nav {
   background-color: var(--background);
 }

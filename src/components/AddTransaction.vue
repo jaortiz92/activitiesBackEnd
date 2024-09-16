@@ -389,6 +389,7 @@ export default {
             text: `Transaction's ID ${response.data.transaction_id}`,
             confirmButtonColor: "#141e28",
           });
+          this.$emit("updatePag");
         } catch (error) {
           this.errorAlert(error, "ERROR to save transaction");
         }

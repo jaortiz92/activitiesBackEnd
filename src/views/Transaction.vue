@@ -1,34 +1,41 @@
 <template>
   <div class="Transaction">
-    <nav class="nav-left">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="dropdown-item" @click="change(1, 'Income')">Income</a>
+    <nav class="nav-vertical" v-if="!selected">
+      <ul>
+        <li>
+          <div class="item-nav" @click="change(1, 'Income')">Income</div>
         </li>
-        <li class="nav-item">
-          <a class="dropdown-item" @click="change(2, 'Expenditure')"
-            >Expenditure</a
-          >
+        <li>
+          <div class="item-nav" @click="change(2, 'Expenditure')">
+            Expenditure
+          </div>
         </li>
-        <li class="nav-item">
-          <a class="dropdown-item" @click="change(2, 'Cost')">Cost</a>
+        <li>
+          <div class="item-nav" @click="change(2, 'Cost')">Cost</div>
         </li>
-        <li class="nav-item">
-          <a class="dropdown-item" @click="change(2, 'Buy Assets')"
-            >Buy Assets</a
-          >
+        <li>
+          <div class="item-nav" @click="change(2, 'Buy Assets')">
+            Buy Assets
+          </div>
         </li>
-        <li class="nav-item">
-          <a class="dropdown-item" @click="change(3, 'Savings')">Savings</a>
+        <li>
+          <div class="item-nav" @click="change(3, 'Savings')">Savings</div>
         </li>
-        <li class="nav-item">
-          <a class="dropdown-item" @click="change(1, 'Transfer')">Transfer</a>
+        <li>
+          <div class="item-nav" @click="change(1, 'Transfer')">Transfer</div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="nav-vertical" v-else @click="selected = false">
+      <ul>
+        <li>
+          <div class="item-nav">Return</div>
         </li>
       </ul>
     </nav>
     <div class="form">
       <AddTransaction
-        v-if="group"
+        v-if="selected"
         @updatePag="refreshPag()"
         :group="group"
         :namePag="namePag"
@@ -50,12 +57,14 @@ export default {
       keyAddTransaction: 0,
       group: null,
       namePag: null,
+      selected: false,
     };
   },
   methods: {
     change: function (group, namePag) {
       this.group = group;
       this.namePag = namePag;
+      this.selected = true;
       this.refreshPag();
     },
     refreshPag: function () {
@@ -64,25 +73,47 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .transaction {
   display: flex;
   justify-content: center;
 }
-.nav-left {
-  display: flex;
-  align-items: center;
-  float: left;
-  width: 15%;
-}
-.nav-left a {
-  color: var(--text);
-}
-.nav-left li:hover {
-  cursor: pointer;
-}
+
 .form {
-  width: 80%;
+  width: 100%;
   float: right;
+}
+
+.nav-vertical {
+  padding: 0px;
+  box-shadow: 0 1px 6px var(--shadow);
+  margin-top: 10px;
+  width: 120px;
+  float: left;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+}
+
+li {
+  margin: 10px;
+}
+
+.item-nav {
+  text-decoration: none;
+  color: var(--dark-color-opposite-one);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: left;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.item-nav:hover {
+  background-color: var(--light-color-opposite-two);
+  cursor: pointer;
 }
 </style>
