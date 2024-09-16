@@ -51,7 +51,6 @@ export default {
 </script>
 <style>
 .transaction-home {
-  display: flex;
   justify-content: center;
   align-items: center;
 }

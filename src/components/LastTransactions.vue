@@ -19,20 +19,22 @@
         v-for="transaction in transactions"
         :key="transaction.transaction_id"
       >
-        <td class="number-value">{{ transaction.transaction_id }}</td>
-        <td>{{ transaction.transaction_date }}</td>
+        <td class="item-number-value">{{ transaction.transaction_id }}</td>
+        <td class="item-special-size">{{ transaction.transaction_date }}</td>
         <td>{{ transaction.category }}</td>
         <td>{{ transaction.description }}</td>
         <td>{{ transaction.kind }}</td>
         <td>{{ transaction.origin }}</td>
         <td>{{ transaction.destiny }}</td>
-        <td>
+        <td class="item-special-size">
           {{ showAccountOfActivity(transaction.activities[0]) }}|{{
             showAccountOfActivity(transaction.activities[1])
           }}
         </td>
-        <td class="number-value">{{ formatterNumber(transaction.value) }}</td>
-        <td class="detail-value">{{ transaction.detail }}</td>
+        <td class="item-number-value">
+          {{ formatterNumber(transaction.value) }}
+        </td>
+        <td class="item-detail-value">{{ transaction.detail }}</td>
       </tbody>
     </table>
   </div>
@@ -82,11 +84,48 @@ export default {
 <style scoped>
 .table-transactions {
   width: 95%;
+  margin-right: auto;
+  margin-left: auto;
+  display: table;
+  min-width: 1200px;
 }
-.detail-value {
+
+table {
+  border: 1px solid var(--gray-border);
+  border-spacing: 0px;
+  width: 100%;
+}
+thead {
+  background-color: var(--dark-color);
+  width: 100%;
+}
+th {
+  height: 30px;
+  text-align: center;
+  padding: 12px 15px;
+  font-size: 110%;
+  color: var(--light-color-opposite-two);
+}
+
+td {
+  width: fit-content;
+  text-align: left;
+  padding: 2px 4px 2px 4px;
+  font-size: 90%;
+}
+tbody:nth-child(even) {
+  background-color: var(--normal-color);
+}
+tbody:nth-child(odd) {
+  background-color: var(--light-color);
+}
+.item-detail-value {
   font-size: 75%;
 }
-.number-value {
+.item-number-value {
   text-align: right;
+}
+.item-special-size {
+  min-width: 85px;
 }
 </style>

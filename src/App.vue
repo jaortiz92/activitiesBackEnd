@@ -1,34 +1,31 @@
 <template>
-  <div id="nav">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link class="dropdown-item" to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="dropdown-item" to="/transaction"
-              >Transaction</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="dropdown-item" to="/edit">Edit</router-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <router-view />
+  <div class="nav-bar">
+    <Navbar></Navbar>
   </div>
+  <router-view />
 </template>
+
+<script setup>
+import Navbar from "@/components/Navbar.vue";
+</script>
 
 <style>
 :root {
   --gray-border: #616161;
-  --text: #070707;
-  --basic: #f74949;
+  --light-border: #dddddd;
+  --text-black: #070707;
+  --text-white: #eeeeee;
   --background: #a8b897;
-  --even-row: #e9f5dc;
-  --odd-row: #b4d68f;
+  --normal-color: #e9f5dc;
+  --light-color: #b4d68f;
+  --dark-color: #667d4e;
+  --normal-color-opposite-one: #836e86;
+  --normal-color-opposite-two: #ccafa7;
+  --light-color-opposite-one: #9d8f9f;
+  --light-color-opposite-two: #f2dfda;
+  --dark-color-opposite-one: #56395b;
+  --dark-color-opposite-two: #8a6256;
+  --shadow: var(--dark-color-opposite-two);
 }
 
 #app {
@@ -39,37 +36,15 @@
   color: var(--text);
 }
 
+.nav-bar {
+  background-color: var(--text);
+}
+
 nav {
   background-color: var(--background);
 }
 
 #nav a.router-link-exact-active {
-  color: var(--basic);
-}
-
-/* Tables */
-table {
-  border: 1.5px solid var(--gray-border);
-}
-th {
-  height: 2rem;
-  border: 1.5px solid var(--gray-border);
-  text-align: center;
-  padding: 12px 15px;
-  font-size: 110%;
-}
-
-td {
-  width: fit-content;
-  border-right: 1px solid var(--gray-border);
-  text-align: left;
-  padding: 2px 4px 2px 4px;
-  font-size: 90%;
-}
-tbody:nth-child(even) {
-  background-color: var(--even-row);
-}
-tbody:nth-child(odd) {
-  background-color: var(--odd-row);
+  color: var(--basic-select);
 }
 </style>

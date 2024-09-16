@@ -59,10 +59,9 @@ export default {
 .card {
   flex: 1 1 calc(20% - 20px);
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--light-border);
   border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px var(--shadow);
   min-width: 150px;
 }
 .card-content {
