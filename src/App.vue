@@ -29,7 +29,7 @@ import Navbar from "@/components/Navbar.vue";
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -42,5 +42,42 @@ nav {
 
 #nav a.router-link-exact-active {
   color: var(--basic-select);
+}
+
+button {
+  color: var(--light-color);
+  font-weight: bold;
+  background-color: var(--normal-color-opposite-one);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+form {
+  width: 70%;
+  min-width: 350px;
+  margin: 0 auto;
+  padding: 2%;
+  border: 1px solid var(--gray-border);
+  border-radius: 5px;
+}
+
+input,
+select,
+textarea {
+  font-family: Helvetica, Arial, sans-serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--dark-color-opposite-one);
+  border-radius: 3px;
+}
+
+label {
+  display: block;
+  width: 30%;
+  min-width: 80px;
 }
 </style>

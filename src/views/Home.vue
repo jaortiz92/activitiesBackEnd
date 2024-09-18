@@ -5,15 +5,17 @@
     </div>
     <div class="rows-to-show">
       <form v-on:submit.prevent="refreshLastTransactions()">
-        <label>Rows to show</label>
-        <input
-          class="form-control"
-          v-model="toShowForm"
-          type="number"
-          min="1"
-          required="true"
-        />
-        <button class="btn btn-danger" type="submit">Show</button>
+        <label class="rows-to-show-label">Rows to show</label>
+        <div>
+          <input
+            class="rows-to-show-input"
+            v-model="toShowForm"
+            type="number"
+            min="1"
+            required="true"
+          />
+          <button class="rows-to-show-button" type="submit">Show</button>
+        </div>
       </form>
     </div>
     <LastTransactions
@@ -49,22 +51,12 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .transaction-home {
   justify-content: center;
   align-items: center;
 }
-.rows-to-show {
-  margin-top: 2%;
-  margin-bottom: 2%;
-  margin-right: 2%;
-}
 
-.rows-to-show button,
-input,
-label {
-  margin-top: 1%;
-}
 .header-home {
   display: flex;
   justify-content: center;
@@ -73,16 +65,36 @@ label {
 }
 .rows-to-show {
   width: 40%;
-  margin: 1% auto;
-  border: 1px solid;
-  margin-bottom: 2%;
-  margin-top: 2%;
+  margin: 2% auto;
   min-width: 250px;
-  background: var(--background);
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
+.rows-to-show-input {
+  width: 50%;
+  font-size: 100%;
+  padding: auto;
+}
+.rows-to-show-label {
+  width: 90%;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.rows-to-show-button {
+  width: 50%;
+}
+
+.rows-to-show div {
+  display: flex;
+}
 form {
-  padding: 4%;
+  width: 80%;
+  background: var(--background);
 }
 </style>

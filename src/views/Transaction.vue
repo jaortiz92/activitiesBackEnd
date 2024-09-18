@@ -75,13 +75,8 @@ export default {
 </script>
 <style scoped>
 .transaction {
-  display: flex;
+  display: inline;
   justify-content: center;
-}
-
-.form {
-  width: 100%;
-  float: right;
 }
 
 .nav-vertical {

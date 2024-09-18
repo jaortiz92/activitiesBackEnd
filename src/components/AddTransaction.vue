@@ -4,18 +4,9 @@
     <div class="input-group">
       <form v-on:submit.prevent="saveTransaction">
         <div class="item-transaction">
-          <label class="label-transaction">Date</label>
-          <input
-            class="form-control input-transaction"
-            v-model="transaction.transaction_date"
-            type="date"
-            required="true"
-          />
-        </div>
-        <div class="item-transaction">
           <label class="label-transaction">Recurring Transactions</label>
           <select
-            class="form-select input-transaction"
+            class="input-transaction"
             @change="generateRecurringTransactions"
             v-model="selectedRecurringTransactions"
           >
@@ -30,12 +21,21 @@
           </select>
         </div>
         <div class="item-transaction">
+          <label class="label-transaction">Date</label>
+          <input
+            class="input-transaction"
+            v-model="transaction.transaction_date"
+            type="date"
+            required="true"
+          />
+        </div>
+        <div class="item-transaction">
           <label class="label-transaction">Accounts</label>
           <div>
             <div class="input-transaction">
-              <label>First</label>
+              <label class="label-transaction">First</label>
               <select
-                class="form-select"
+                class="medium-input"
                 v-model="transaction.activity_one.account_id"
                 required="true"
               >
@@ -51,7 +51,7 @@
                 </option>
               </select>
               <select
-                class="form-select"
+                class="min-input"
                 @change="validateNature(1)"
                 v-model="transaction.activity_one.nature"
                 required="true"
@@ -64,9 +64,9 @@
               </select>
             </div>
             <div class="input-transaction">
-              <label>Second</label>
+              <label class="label-transaction">Second</label>
               <select
-                class="form-select"
+                class="medium-input"
                 v-model="transaction.activity_two.account_id"
                 required="true"
               >
@@ -82,7 +82,7 @@
                 </option>
               </select>
               <select
-                class="form-select"
+                class="min-input"
                 @change="validateNature(2)"
                 v-model="transaction.activity_two.nature"
                 required="true"
@@ -206,7 +206,7 @@
             rows="3"
           />
         </div>
-        <div class="d-grid gap-2 col-6 mx-auto item-transaction">
+        <div class="button-transaction">
           <button class="btn btn-primary" type="submit">Save</button>
         </div>
       </form>
@@ -418,17 +418,28 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .item-transaction {
   display: flex;
   align-items: center;
-  margin-top: 1%;
 }
 .label-transaction {
   width: 15%;
-  margin-right: 7%;
   text-align: left;
 }
 .input-transaction {
+  display: flex;
+}
+
+.min-input {
+  width: 30%;
+}
+.medium-input {
+  width: 70%;
+}
+
+button {
+  width: 40%;
+  font-size: 100%;
 }
 </style>
