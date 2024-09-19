@@ -1,5 +1,5 @@
 <template>
-  <div class="Transaction">
+  <div class="transaction">
     <nav class="nav-vertical" v-if="!selected">
       <ul>
         <li>
@@ -82,7 +82,6 @@ export default {
 .nav-vertical {
   padding: 0px;
   box-shadow: 0 1px 6px var(--shadow);
-  margin-top: 10px;
   width: 120px;
   float: left;
 }
@@ -110,5 +109,9 @@ li {
 .item-nav:hover {
   background-color: var(--light-color-opposite-two);
   cursor: pointer;
+}
+
+.transaction-form {
+  padding-top: 60px;
 }
 </style>

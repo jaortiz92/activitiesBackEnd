@@ -1,15 +1,17 @@
 <template>
   <div class="delete-form">
     <form v-on:submit.prevent="deleteTransaction">
-      <label class="delete-items">ID Transaction</label>
-      <input
-        class="form-control delete-items"
-        v-model="transaction_id"
-        type="number"
-        min="1"
-        required="true"
-      />
-      <button class="btn btn-danger delete-items" type="submit">Delete</button>
+      <label class="delete-items-label">Delete Transaction by ID</label>
+      <div>
+        <input
+          class="delete-items-input"
+          v-model="transaction_id"
+          type="number"
+          min="1"
+          required="true"
+        />
+        <button class="delete-items-button" type="submit">Delete</button>
+      </div>
     </form>
   </div>
 </template>
@@ -62,14 +64,42 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .delete-form {
-  background-color: var(--background);
-  width: 20%;
-  padding: 2%;
-  margin-left: 2%;
+  margin: auto;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  width: 40%;
+  min-width: 250px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.delete-items {
-  margin-bottom: 2%;
+
+form {
+  width: 100%;
+  background: var(--background);
+  padding: 7%;
+}
+
+.delete-items-label {
+  width: 100%;
+  font-size: 100%;
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+
+.delete-form div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+}
+
+.delete-items-input,
+.delete-items-button {
+  flex: 1;
+  margin: 0 10px;
 }
 </style>

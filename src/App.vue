@@ -69,8 +69,9 @@ select,
 textarea {
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   border: 1px solid var(--dark-color-opposite-one);
   border-radius: 3px;
 }
@@ -79,5 +80,13 @@ label {
   display: block;
   width: 30%;
   min-width: 80px;
+}
+
+.title {
+  font-size: 200%;
+  font-weight: bold;
+  margin-bottom: 4%;
+  text-align: center;
+  color: var(--dark-color-opposite-one);
 }
 </style>

@@ -63,38 +63,42 @@ export default {
   margin-bottom: 2%;
   margin-top: 2%;
 }
+
+form {
+  width: 80%;
+  background: var(--background);
+  padding: 7%;
+}
+
 .rows-to-show {
+  margin: auto;
+  margin-bottom: 5%;
+  margin-top: 5%;
   width: 40%;
-  margin: 2% auto;
   min-width: 250px;
   border-radius: 5px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.rows-to-show-input {
-  width: 50%;
-  font-size: 100%;
-  padding: auto;
-}
 .rows-to-show-label {
-  width: 90%;
+  width: 100%;
   font-size: 100%;
   font-weight: bold;
-  padding: 10px;
-}
-
-.rows-to-show-button {
-  width: 50%;
+  margin-bottom: 5%;
 }
 
 .rows-to-show div {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
 }
-form {
-  width: 80%;
-  background: var(--background);
+
+.rows-to-show-input,
+.rows-to-show-button {
+  flex: 1;
+  margin: 0 10px;
 }
 </style>

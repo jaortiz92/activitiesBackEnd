@@ -1,8 +1,8 @@
 <template>
   <div class="transaction-form">
-    <h1>{{ namePag }}</h1>
     <div class="input-group">
-      <form v-on:submit.prevent="saveTransaction">
+      <form class="form-transaction" v-on:submit.prevent="saveTransaction">
+        <div class="title">{{ namePag }}</div>
         <div class="item-transaction">
           <label class="label-transaction">Recurring Transactions</label>
           <select
@@ -419,12 +419,21 @@ export default {
 };
 </script>
 <style scoped>
+form {
+  background-color: var(--background);
+}
+
+.form-transaction {
+  box-shadow: 0 1px 6px var(--shadow);
+}
+
 .item-transaction {
   display: flex;
   align-items: center;
 }
 .label-transaction {
-  width: 15%;
+  width: 20%;
+  min-width: 95px;
   text-align: left;
 }
 .input-transaction {

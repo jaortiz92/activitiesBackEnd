@@ -22,6 +22,7 @@
 nav {
   padding: 10px;
   box-shadow: 0 1px 6px var(--shadow);
+  margin-bottom: 10px;
 }
 
 ul {

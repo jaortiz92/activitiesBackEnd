@@ -38,13 +38,9 @@ export default {
   },
 };
 </script>
-<style>
-.box-delete {
-  margin-top: 2%;
-  margin-bottom: 3%;
-}
-.box-transaction {
-  display: flex;
+<style scoped>
+.edit {
   justify-content: center;
+  align-items: center;
 }
 </style>
