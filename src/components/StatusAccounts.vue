@@ -15,6 +15,7 @@
 <script>
 import Swal from "sweetalert2";
 import { queriesService } from "../services/queriesService";
+import { formatters } from "@/plugins/formatters.js";
 
 export default {
   name: "StatusAccounts",
@@ -28,8 +29,7 @@ export default {
   },
   methods: {
     formatterNumber: function (value) {
-      var formatter = new Intl.NumberFormat("es-CO", {});
-      return formatter.format(value);
+      return formatters.formatterGeneralNumber(value);
     },
     async getdepositAccounts() {
       try {

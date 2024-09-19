@@ -214,7 +214,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import Swal from "sweetalert2";
 import { recurringTransactions } from "../data/recurringTransactions.js";
 import { transactionService } from "../services/transactionService.js";

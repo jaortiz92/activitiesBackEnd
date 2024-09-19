@@ -43,6 +43,7 @@
 <script>
 import Swal from "sweetalert2";
 import { transactionService } from "@/services/transactionService";
+import { formatters } from "@/plugins/formatters.js";
 
 export default {
   name: "LastTransactions",
@@ -72,8 +73,7 @@ export default {
       }
     },
     formatterNumber: function (value) {
-      var formatter = new Intl.NumberFormat("es-CO", {});
-      return formatter.format(value);
+      return formatters.formatterGeneralNumber(value);
     },
     showAccountOfActivity(value) {
       return `${value.nature}-${value.account_id}`;
